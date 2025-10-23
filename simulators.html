@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateurs - Green Hash Maroc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sage: #87A96B;
+            --charcoal: #2D3436;
+            --mint: #00B894;
+            --cream: #F7F3E9;
+            --gold: #F39C12;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .simulator-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .simulator-card:hover {
+            border-color: var(--mint);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .slider-container {
+            position: relative;
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e2e8f0;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        .slider:hover {
+            opacity: 1;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--mint);
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--mint);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .result-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .animate-number {
+            transition: all 0.5s ease;
+        }
+        
+        .pulse-green {
+            animation: pulse-green 2s infinite;
+        }
+        
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl text-gray-900">Green Hash</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 transition-colors">Accueil</a>
+                    <a href="vision.html" class="text-gray-700 hover:text-green-600 transition-colors">Vision</a>
+                    <a href="pool.html" class="text-gray-700 hover:text-green-600 transition-colors">Mining Pool</a>
+                    <a href="exchange.html" class="text-gray-700 hover:text-green-600 transition-colors">Exchange</a>
+                    <a href="services.html" class="text-gray-700 hover:text-green-600 transition-colors">Services</a>
+                    <a href="invest.html" class="text-gray-700 hover:text-green-600 transition-colors">Investir</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-600 transition-colors">Communauté</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <select id="language-select" class="bg-transparent border-0 text-sm">
+                        <option value="fr">FR</option>
+                        <option value="en">EN</option>
+                        <option value="ar">AR</option>
+                    </select>
+                    <button onclick="window.location.href='connect.html'" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Connecter Wallet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Simulateurs <span class="text-gradient">Interactifs</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                    Calculez vos gains potentiels et explorez les opportunités d'investissement
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-green-600">15-25%</div>
+                        <div class="text-sm text-gray-600">ROI estimé</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-blue-600">100%</div>
+                        <div class="text-sm text-gray-600">Énergie verte</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-purple-600">24/7</div>
+                        <div class="text-sm text-gray-600">Monitoring</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mining Simulator -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Simulateur de Mining</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Calculez vos revenus potentiels en fonction de votre puissance de calcul
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Simulator Controls -->
+                <div class="simulator-card rounded-2xl p-8">
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-6">Paramètres</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Hash Rate -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">
+                                Puissance de calcul (TH/s)
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="hashrate-slider" class="slider" 
+                                       min="0.1" max="100" value="10" step="0.1">
+                                <div class="flex justify-between text-sm text-gray-600 mt-2">
+                                    <span>0.1 TH/s</span>
+                                    <span id="hashrate-value" class="font-semibold text-green-600">10 TH/s</span>
+                                    <span>100 TH/s</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Electricity Cost -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">
+                                Coût électricité (MAD/kWh)
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="electricity-slider" class="slider" 
+                                       min="0.5" max="2" value="1.2" step="0.1">
+                                <div class="flex justify-between text-sm text-gray-600 mt-2">
+                                    <span>0.5 MAD</span>
+                                    <span id="electricity-value" class="font-semibold text-blue-600">1.2 MAD/kWh</span>
+                                    <span>2.0 MAD</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mining Duration -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">
+                                Durée du minage
+                            </label>
+                            <select id="duration-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="1">1 mois</option>
+                                <option value="3">3 mois</option>
+                                <option value="6">6 mois</option>
+                                <option value="12" selected>1 an</option>
+                                <option value="24">2 ans</option>
+                                <option value="60">5 ans</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Cryptocurrency -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">
+                                Cryptomonnaie
+                            </label>
+                            <select id="crypto-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="btc" selected>Bitcoin (BTC)</option>
+                                <option value="eth">Ethereum (ETH)</option>
+                                <option value="kas">Kaspa (KAS)</option>
+                                <option value="doge">Dogecoin (DOGE)</option>
+                            </select>
+                        </div>
+                        
+                        <button onclick="calculateMining()" class="w-full bg-green-600 text-white py-4 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Calculer les revenus
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results -->
+                <div class="result-card rounded-2xl p-8">
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-6">Résultats</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Daily Earnings -->
+                        <div class="bg-green-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Revenus quotidiens</span>
+                                <i class="fas fa-calendar-day text-green-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-green-600 animate-number" id="daily-earnings">0.0000 BTC</div>
+                            <div class="text-sm text-gray-600" id="daily-earnings-mad">0 MAD</div>
+                        </div>
+                        
+                        <!-- Monthly Earnings -->
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Revenus mensuels</span>
+                                <i class="fas fa-calendar-alt text-blue-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-blue-600 animate-number" id="monthly-earnings">0.0000 BTC</div>
+                            <div class="text-sm text-gray-600" id="monthly-earnings-mad">0 MAD</div>
+                        </div>
+                        
+                        <!-- Total Earnings -->
+                        <div class="bg-purple-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Revenus totaux</span>
+                                <i class="fas fa-coins text-purple-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-purple-600 animate-number" id="total-earnings">0.0000 BTC</div>
+                            <div class="text-sm text-gray-600" id="total-earnings-mad">0 MAD</div>
+                        </div>
+                        
+                        <!-- Profitability -->
+                        <div class="bg-yellow-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Rentabilité</span>
+                                <i class="fas fa-chart-line text-yellow-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-yellow-600 animate-number" id="profitability">0%</div>
+                            <div class="text-sm text-gray-600" id="profit-status">En attente de calcul</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart -->
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-gray-900 mb-4">Projection des revenus</h4>
+                        <div class="h-64">
+                            <canvas id="miningChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Simulator -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Simulateur d'Investissement</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Estimez vos retours sur investissement selon différentes stratégies
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Investment Controls -->
+                <div class="simulator-card rounded-2xl p-8">
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-6">Paramètres d'investissement</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Investment Amount -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">
+                                Montant d'investissement (MAD)
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="investment-slider" class="slider" 
+                                       min="5000" max="1000000" value="50000" step="5000">
+                                <div class="flex justify-between text-sm text-gray-600 mt-2">
+                                    <span>5,000 MAD</span>
+                                    <span id="investment-value" class="font-semibold text-green-600">50,000 MAD</span>
+                                    <span>1,000,000 MAD</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Investment Type -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">
+                                Type d'investissement
+                            </label>
+                            <select id="investment-type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="mining">Mining Pool</option>
+                                <option value="exchange">Exchange</option>
+                                <option value="technology">Technologie</option>
+                                <option value="token">Token GHM</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Investment Duration -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">
+                                Durée de l'investissement
+                            </label>
+                            <select id="investment-duration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="6">6 mois</option>
+                                <option value="12" selected>1 an</option>
+                                <option value="24">2 ans</option>
+                                <option value="36">3 ans</option>
+                                <option value="60">5 ans</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Risk Level -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">
+                                Niveau de risque
+                            </label>
+                            <select id="risk-level" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="low">Faible (10-15% ROI)</option>
+                                <option value="medium" selected>Modéré (15-25% ROI)</option>
+                                <option value="high">Élevé (25-35% ROI)</option>
+                            </select>
+                        </div>
+                        
+                        <button onclick="calculateInvestment()" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-chart-line mr-2"></i>
+                            Calculer le ROI
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Investment Results -->
+                <div class="result-card rounded-2xl p-8">
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-6">Résultats d'investissement</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Expected ROI -->
+                        <div class="bg-green-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">ROI attendu</span>
+                                <i class="fas fa-percentage text-green-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-green-600 animate-number" id="expected-roi">0%</div>
+                            <div class="text-sm text-gray-600">Par an</div>
+                        </div>
+                        
+                        <!-- Total Return -->
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Retour total</span>
+                                <i class="fas fa-coins text-blue-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-blue-600 animate-number" id="total-return">0 MAD</div>
+                            <div class="text-sm text-gray-600">Capital + bénéfices</div>
+                        </div>
+                        
+                        <!-- Net Profit -->
+                        <div class="bg-purple-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Bénéfice net</span>
+                                <i class="fas fa-arrow-up text-purple-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-purple-600 animate-number" id="net-profit">0 MAD</div>
+                            <div class="text-sm text-gray-600">Après déduction du capital</div>
+                        </div>
+                        
+                        <!-- Monthly Income -->
+                        <div class="bg-yellow-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Revenu mensuel</span>
+                                <i class="fas fa-calendar-alt text-yellow-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-yellow-600 animate-number" id="monthly-income">0 MAD</div>
+                            <div class="text-sm text-gray-600">En moyenne</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Risk Analysis -->
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-gray-900 mb-4">Analyse des risques</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Risque de volatilité</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-16 bg-gray-200 rounded-full h-2">
+                                        <div id="volatility-risk" class="bg-red-500 h-2 rounded-full" style="width: 30%"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Faible</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Risque réglementaire</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-16 bg-gray-200 rounded-full h-2">
+                                        <div id="regulatory-risk" class="bg-yellow-500 h-2 rounded-full" style="width: 20%"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Très faible</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Risque technologique</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-16 bg-gray-200 rounded-full h-2">
+                                        <div id="tech-risk" class="bg-green-500 h-2 rounded-full" style="width: 15%"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Minimal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Tool -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Comparateur d'Investissements</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comparez différentes stratégies d'investissement côte à côte
+                </p>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Type d'investissement</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Montant minimum</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">ROI estimé</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Risque</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Liquidité</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-green-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-pickaxe text-white text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Mining Pool</div>
+                                        <div class="text-sm text-gray-500">Revenus passifs</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">50,000 MAD</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">15-20%</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Faible
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Moyenne</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button onclick="selectInvestmentType('mining')" class="text-green-600 hover:text-green-900">
+                                    Sélectionner
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-blue-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-exchange-alt text-white text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Exchange</div>
+                                        <div class="text-sm text-gray-500">Croissance élevée</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">100,000 MAD</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600">20-25%</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Moyen
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Bonne</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button onclick="selectInvestmentType('exchange')" class="text-blue-600 hover:text-blue-900">
+                                    Sélectionner
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-purple-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-cogs text-white text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Technologie</div>
+                                        <div class="text-sm text-gray-500">ROI maximal</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">500,000 MAD</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600">25-35%</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    Élevé
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Faible</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button onclick="selectInvestmentType('technology')" class="text-purple-600 hover:text-purple-900">
+                                    Sélectionner
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-yellow-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-coins text-white text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Token GHM</div>
+                                        <div class="text-sm text-gray-500">Staking & governance</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">25,000 MAD</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600">18-28%</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Moyen
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Variable</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button onclick="selectInvestmentType('token')" class="text-yellow-600 hover:text-yellow-900">
+                                    Sélectionner
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-br from-green-600 to-blue-600">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-display text-4xl font-bold text-white mb-6">
+                Prêt à investir ?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Rejoignez des milliers d'investisseurs qui font confiance à Green Hash pour leur avenir financier.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="window.location.href='invest.html'" class="bg-white text-green-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
+                    Devenir investisseur
+                </button>
+                <button onclick="window.location.href='connect.html'" class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-green-600 transition-all transform hover:scale-105">
+                    Connecter wallet
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl">Green Hash Maroc</span>
+                </div>
+                
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Mining the Future. The Green Way. Premier pool minier marocain alimenté par énergie renouvelable.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Green Hash Maroc. Tous droits réservés. | Nador, Maroc
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="simulators.js"></script>
+</body>
+</html>

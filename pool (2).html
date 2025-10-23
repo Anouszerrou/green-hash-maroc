@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mining Pool Maroc - Green Hash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sage: #87A96B;
+            --charcoal: #2D3436;
+            --mint: #00B894;
+            --cream: #F7F3E9;
+            --gold: #F39C12;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl text-gray-900">Green Hash</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 transition-colors">Accueil</a>
+                    <a href="vision.html" class="text-gray-700 hover:text-green-600 transition-colors">Vision</a>
+                    <a href="#pool" class="text-green-600 font-semibold">Mining Pool</a>
+                    <a href="exchange.html" class="text-gray-700 hover:text-green-600 transition-colors">Exchange</a>
+                    <a href="services.html" class="text-gray-700 hover:text-green-600 transition-colors">Services</a>
+                    <a href="invest.html" class="text-gray-700 hover:text-green-600 transition-colors">Investir</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-600 transition-colors">Communauté</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <select id="language-select" class="bg-transparent border-0 text-sm">
+                        <option value="fr">FR</option>
+                        <option value="en">EN</option>
+                        <option value="ar">AR</option>
+                    </select>
+                    <button onclick="showJoinModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Rejoindre le Pool
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Mining Pool <span class="text-gradient">Maroc</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                    Rejoignez le premier pool marocain FPPS / PPLNS alimenté par énergie verte
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-green-600">12.5 TH/s</div>
+                        <div class="text-sm text-gray-600">Hashrate total</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-blue-600">1,247</div>
+                        <div class="text-sm text-gray-600">Mineurs actifs</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-purple-600">127</div>
+                        <div class="text-sm text-gray-600">Blocs trouvés</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pool Features -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Pourquoi choisir notre Pool ?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Infrastructure sécurisée, transparente et optimisée pour les mineurs marocains et internationaux
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-leaf text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">Énergie 100% verte</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        Alimenté exclusivement par énergie solaire et éolienne marocaine pour un minage durable et responsable.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">FPPS / PPLNS</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        Système de paiement équitable avec FPPS (Full Pay Per Share) et PPLNS (Pay Per Last N Shares) au choix.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">Sécurité maximale</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        Protection anti-DDoS, système anti-fraude et monitoring 24/7 pour sécuriser vos opérations.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-credit-card text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">Payouts automatiques</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        Paiements automatiques quotidiens sans minimum, directement dans votre wallet préféré.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-globe text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">Interface bilingue</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        Dashboard disponible en français et anglais pour servir la communauté locale et internationale.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-server text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">Hébergement local</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        Serveurs hébergés au Maroc pour une latence minimale et une conformité réglementaire optimale.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-time Dashboard -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Tableau de bord en temps réel</h2>
+                <p class="text-xl text-gray-600">Suivez les performances du pool et vos gains en direct</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Hashrate Chart -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display text-2xl font-semibold mb-6 text-gray-900">Hashrate du Pool</h3>
+                    <div class="h-64">
+                        <canvas id="hashrateChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Blocks Found Chart -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display text-2xl font-semibold mb-6 text-gray-900">Blocs trouvés</h3>
+                    <div class="h-64">
+                        <canvas id="blocksChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pool Statistics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2" id="poolHashrate">12.5 TH/s</div>
+                    <div class="text-gray-600 mb-2">Hashrate total</div>
+                    <div class="text-sm text-green-500">
+                        <i class="fas fa-arrow-up"></i> +2.3% aujourd'hui
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-3xl font-bold text-blue-600 mb-2" id="activeMiners">1,247</div>
+                    <div class="text-gray-600 mb-2">Mineurs actifs</div>
+                    <div class="text-sm text-blue-500">
+                        <i class="fas fa-users"></i> +89 aujourd'hui
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-3xl font-bold text-purple-600 mb-2" id="blocksFound">127</div>
+                    <div class="text-gray-600 mb-2">Blocs ce mois</div>
+                    <div class="text-sm text-purple-500">
+                        <i class="fas fa-cube"></i> Dernier: il y a 2h
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-3xl font-bold text-yellow-600 mb-2" id="avgRewards">0.0023 BTC</div>
+                    <div class="text-gray-600 mb-2">Récompense moyenne</div>
+                    <div class="text-sm text-yellow-500">
+                        <i class="fas fa-bitcoin"></i> Par bloc
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Technologie & Infrastructure</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Basé sur une infrastructure sécurisée, open source et hébergée localement
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h3 class="font-display text-3xl font-semibold text-gray-900 mb-8">Architecture du Pool</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-code text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2">Open Source</h4>
+                                <p class="text-gray-600">Code source transparent et auditable par la communauté pour une confiance maximale.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-server text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2">Infrastructure locale</h4>
+                                <p class="text-gray-600">Serveurs hébergés dans des data centers marocains pour une latence minimale.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-shield-alt text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2">Sécurité avancée</h4>
+                                <p class="text-gray-600">Protection anti-DDoS, monitoring 24/7 et sauvegardes régulières.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-tachometer-alt text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2">Haute performance</h4>
+                                <p class="text-gray-600">Optimisation des algorithmes pour des payouts rapides et efficaces.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-green-100 to-blue-100 rounded-3xl p-8">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                                <div class="text-2xl font-bold text-green-600 mb-2">99.9%</div>
+                                <div class="text-sm text-gray-600">Uptime</div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                                <div class="text-2xl font-bold text-blue-600 mb-2">50ms</div>
+                                <div class="text-sm text-gray-600">Latence</div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                                <div class="text-2xl font-bold text-purple-600 mb-2">24/7</div>
+                                <div class="text-sm text-gray-600">Monitoring</div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                                <div class="text-2xl font-bold text-yellow-600 mb-2">SSL</div>
+                                <div class="text-sm text-gray-600">Cryptage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Pool Modal -->
+    <div id="joinModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Rejoindre le Pool</h3>
+                <p class="text-gray-600">Inscrivez-vous pour commencer à miner</p>
+            </div>
+            
+            <form id="joinForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nom d'utilisateur</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Votre nom d'utilisateur">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="votre@email.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Adresse Bitcoin</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Votre adresse BTC">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Système de paiement</label>
+                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="fpps">FPPS (Full Pay Per Share)</option>
+                        <option value="pplns">PPLNS (Pay Per Last N Shares)</option>
+                    </select>
+                </div>
+                
+                <div class="flex space-x-4 pt-4">
+                    <button type="button" onclick="hideJoinModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        Annuler
+                    </button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                        Rejoindre
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl">Green Hash Maroc</span>
+                </div>
+                
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Mining the Future. The Green Way. Premier pool minier marocain alimenté par énergie renouvelable.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Green Hash Maroc. Tous droits réservés. | Nador, Maroc
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hashrate Chart
+            const hashrateCtx = document.getElementById('hashrateChart').getContext('2d');
+            new Chart(hashrateCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
+                    datasets: [{
+                        label: 'TH/s',
+                        data: [11.2, 11.8, 12.1, 12.5, 12.3, 12.7, 12.5],
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Blocks Chart
+            const blocksCtx = document.getElementById('blocksChart').getContext('2d');
+            new Chart(blocksCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+                    datasets: [{
+                        label: 'Blocs',
+                        data: [18, 22, 15, 19, 25, 21, 7],
+                        backgroundColor: '#3B82F6',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Real-time stats update simulation
+            setInterval(() => {
+                const hashrateEl = document.getElementById('poolHashrate');
+                const minersEl = document.getElementById('activeMiners');
+                const currentHashrate = parseFloat(hashrateEl.textContent);
+                const currentMiners = parseInt(minersEl.textContent);
+                
+                // Simulate small variations
+                const newHashrate = currentHashrate + (Math.random() - 0.5) * 0.2;
+                const newMiners = currentMiners + Math.floor(Math.random() * 3) - 1;
+                
+                hashrateEl.textContent = newHashrate.toFixed(1) + ' TH/s';
+                minersEl.textContent = Math.max(1200, newMiners).toString();
+            }, 5000);
+        });
+
+        // Modal functions
+        function showJoinModal() {
+            document.getElementById('joinModal').classList.remove('hidden');
+        }
+
+        function hideJoinModal() {
+            document.getElementById('joinModal').classList.add('hidden');
+        }
+
+        // Form submission
+        document.getElementById('joinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Inscription réussie ! Vous recevrez vos identifiants de connexion par email.');
+            hideJoinModal();
+        });
+
+        // Language selector
+        document.getElementById('language-select').addEventListener('change', function(e) {
+            const lang = e.target.value;
+            console.log('Language switched to:', lang);
+        });
+    </script>
+</body>
+</html>

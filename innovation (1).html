@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovation & Technologie Verte - Green Hash Maroc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sage: #87A96B;
+            --charcoal: #2D3436;
+            --mint: #00B894;
+            --cream: #F7F3E9;
+            --gold: #F39C12;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-flow {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        
+        .energy-flow {
+            background: linear-gradient(135deg, #f7fee7 0%, #ecfccb 100%);
+        }
+        
+        .blockchain-flow {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl text-gray-900">Green Hash</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 transition-colors">Accueil</a>
+                    <a href="vision.html" class="text-gray-700 hover:text-green-600 transition-colors">Vision</a>
+                    <a href="pool.html" class="text-gray-700 hover:text-green-600 transition-colors">Mining Pool</a>
+                    <a href="exchange.html" class="text-gray-700 hover:text-green-600 transition-colors">Exchange</a>
+                    <a href="services.html" class="text-gray-700 hover:text-green-600 transition-colors">Services</a>
+                    <a href="invest.html" class="text-gray-700 hover:text-green-600 transition-colors">Investir</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-600 transition-colors">Communauté</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <select id="language-select" class="bg-transparent border-0 text-sm">
+                        <option value="fr">FR</option>
+                        <option value="en">EN</option>
+                        <option value="ar">AR</option>
+                    </select>
+                    <button onclick="window.location.href='invest.html'" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Investir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Innovation & <span class="text-gradient">Technologie Verte</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                    Un modèle économique basé sur l'énergie propre et l'intelligence artificielle
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-green-600">100%</div>
+                        <div class="text-sm text-gray-600">Énergie renouvelable</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-blue-600">2027</div>
+                        <div class="text-sm text-gray-600">Zéro émission</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-purple-600">IA</div>
+                        <div class="text-sm text-gray-600">Monitoring intelligent</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Flow -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Notre Chaîne Technologique</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Du microgrid solaire à la blockchain : un écosystème vert et intelligent
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Energy Generation -->
+                <div class="energy-flow rounded-2xl p-8 text-center">
+                    <div class="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-solar-panel text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Microgrid Solaire</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Production d'énergie propre à travers des panneaux solaires et des éoliennes intelligentes optimisées par l'IA.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Production actuelle</span>
+                            <span class="font-semibold text-green-600">2.4 MWh</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Efficacité</span>
+                            <span class="font-semibold text-green-600">94.2%</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Capacité totale</span>
+                            <span class="font-semibold text-green-600">5.2 MWp</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Center -->
+                <div class="tech-flow rounded-2xl p-8 text-center">
+                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-server text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Data Center Vert</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Infrastructure de minage alimentée par énergie renouvelable avec systèmes de refroidissement écologiques.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Hashrate total</span>
+                            <span class="font-semibold text-blue-600">12.5 TH/s</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Température</span>
+                            <span class="font-semibold text-blue-600">22°C</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">PUE</span>
+                            <span class="font-semibold text-blue-600">1.12</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blockchain -->
+                <div class="blockchain-flow rounded-2xl p-8 text-center">
+                    <div class="w-20 h-20 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-cube text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Blockchain Verte</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Réseau blockchain optimisé pour les transactions rapides avec empreinte carbone minimale.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Blocs/jour</span>
+                            <span class="font-semibold text-purple-600">144</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">TPS</span>
+                            <span class="font-semibold text-purple-600">3,000</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-600">Émission CO₂</span>
+                            <span class="font-semibold text-purple-600">0.1 kg/tx</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flow Diagram -->
+            <div class="bg-gray-50 rounded-3xl p-8">
+                <h3 class="font-display text-2xl font-semibold text-center text-gray-900 mb-8">Flux d'énergie et de données</h3>
+                <div class="flex items-center justify-center space-x-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mb-2">
+                            <i class="fas fa-sun text-white"></i>
+                        </div>
+                        <div class="text-sm font-semibold text-gray-900">Énergie Solaire</div>
+                    </div>
+                    
+                    <div class="flex-1 h-1 bg-gradient-to-r from-yellow-400 to-blue-400 rounded-full"></div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-2">
+                            <i class="fas fa-bolt text-white"></i>
+                        </div>
+                        <div class="text-sm font-semibold text-gray-900">Microgrid</div>
+                    </div>
+                    
+                    <div class="flex-1 h-1 bg-gradient-to-r from-blue-400 to-green-400 rounded-full"></div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-2">
+                            <i class="fas fa-server text-white"></i>
+                        </div>
+                        <div class="text-sm font-semibold text-gray-900">Data Center</div>
+                    </div>
+                    
+                    <div class="flex-1 h-1 bg-gradient-to-r from-green-400 to-purple-400 rounded-full"></div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-2">
+                            <i class="fas fa-cube text-white"></i>
+                        </div>
+                        <div class="text-sm font-semibold text-gray-900">Blockchain</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Monitoring -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-display text-4xl font-bold text-gray-900 mb-8">
+                        Monitoring par <span class="text-gradient">Intelligence Artificielle</span>
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-brain text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Optimisation énergétique</h3>
+                                <p class="text-gray-600">L'IA analyse les patterns de consommation et ajuste automatiquement la production pour maximiser l'efficacité.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-thermometer-half text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Gestion thermique</h3>
+                                <p class="text-gray-600">Contrôle intelligent du refroidissement pour maintenir des températures optimales tout en réduisant la consommation énergétique.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-chart-line text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Prédictions avancées</h3>
+                                <p class="text-gray-600">Analyse prédictive des besoins énergétiques et de la production minière pour une planification optimale.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-6 text-center">Performance IA en temps réel</h3>
+                    <div class="h-64 mb-6">
+                        <canvas id="aiChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-600">23%</div>
+                            <div class="text-sm text-gray-600">Gain d'efficacité</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-600">15%</div>
+                            <div class="text-sm text-gray-600">Réduction conso</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Green Technologies -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Technologies Vertes</h2>
+                <p class="text-xl text-gray-600">Innovations écologiques pour un minage responsable</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-wind text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">Refroidissement écologique</h3>
+                    <p class="text-gray-600 text-center leading-relaxed mb-6">
+                        Systèmes de refroidissement utilisant l'air naturel et des liquides biodégradables pour réduire l'empreinte carbone.
+                    </p>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-600 mb-2">40%</div>
+                        <div class="text-sm text-gray-600">Économie d'énergie</div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-recycle text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">Économie circulaire</h3>
+                    <p class="text-gray-600 text-center leading-relaxed mb-6">
+                        Réutilisation de la chaleur de minage pour le chauffage des bâtiments et des serres agricoles.
+                    </p>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">85%</div>
+                        <div class="text-sm text-gray-600">Chaleur récupérée</div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-battery-full text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-center text-gray-900">Stockage d'énergie</h3>
+                    <p class="text-gray-600 text-center leading-relaxed mb-6">
+                        Batteries intelligentes et stockage par gravité pour une utilisation optimale de l'énergie renouvelable.
+                    </p>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-yellow-600 mb-2">12h</div>
+                        <div class="text-sm text-gray-600">Autonomie complète</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carbon Footprint -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Empreinte Carbone</h2>
+                <p class="text-xl text-gray-600">Objectif zéro émission carbone d'ici 2027</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-6 text-center">Réduction des émissions</h3>
+                    <div class="h-64 mb-6">
+                        <canvas id="carbonChart"></canvas>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-600 mb-2">-78%</div>
+                        <div class="text-sm text-gray-600">Émissions réduites depuis 2023</div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-semibold text-gray-900">Émissions actuelles</h4>
+                            <span class="text-2xl font-bold text-red-600">0.1 kg CO₂/tx</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-red-500 h-3 rounded-full" style="width: 25%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">75% de réduction par rapport au minage traditionnel</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-semibold text-gray-900">Objectif 2027</h4>
+                            <span class="text-2xl font-bold text-green-600">0 kg CO₂/tx</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-green-500 h-3 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Zéro émission carbone grâce aux compensations</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-semibold text-gray-900">Compensation carbone</h4>
+                            <span class="text-2xl font-bold text-blue-600">+5,000</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-blue-500 h-3 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Arbres plantés pour compenser les émissions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Feuille de route verte</h2>
+                <p class="text-xl text-gray-600">Évolutions technologiques pour un avenir durable</p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-green-400 to-blue-400"></div>
+                
+                <div class="space-y-12">
+                    <!-- 2025 -->
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-green-50 rounded-2xl p-6">
+                                <h3 class="font-display text-2xl font-semibold text-gray-900 mb-2">2025</h3>
+                                <h4 class="font-semibold text-gray-900 mb-3">Pool Live & Optimisation IA</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Lancement du pool minier vert</li>
+                                    <li>• Intégration complète de l'IA</li>
+                                    <li>• Optimisation énergétique avancée</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center relative z-10">
+                            <i class="fas fa-rocket text-white text-sm"></i>
+                        </div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                    
+                    <!-- 2026 -->
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8"></div>
+                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center relative z-10">
+                            <i class="fas fa-exchange-alt text-white text-sm"></i>
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-blue-50 rounded-2xl p-6">
+                                <h3 class="font-display text-2xl font-semibold text-gray-900 mb-2">2026</h3>
+                                <h4 class="font-semibold text-gray-900 mb-3">Exchange Officiel</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Lancement de l'exchange</li>
+                                    <li>• Support multi-crypto</li>
+                                    <li>• Intégration bancaire marocaine</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2027 -->
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-purple-50 rounded-2xl p-6">
+                                <h3 class="font-display text-2xl font-semibold text-gray-900 mb-2">2027</h3>
+                                <h4 class="font-semibold text-gray-900 mb-3">Token GHM & Zéro Émission</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Lancement du token GHM</li>
+                                    <li>• Certification zéro émission</li>
+                                    <li>• Compensation carbone complète</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center relative z-10">
+                            <i class="fas fa-leaf text-white text-sm"></i>
+                        </div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                    
+                    <!-- 2028 -->
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8"></div>
+                        <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center relative z-10">
+                            <i class="fas fa-cubes text-white text-sm"></i>
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-yellow-50 rounded-2xl p-6">
+                                <h3 class="font-display text-2xl font-semibold text-gray-900 mb-2">2028</h3>
+                                <h4 class="font-semibold text-gray-900 mb-3">Blockchain GreenHash</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Lancement blockchain propriétaire</li>
+                                    <li>• Smart contracts avancés</li>
+                                    <li>• Validation PoS verte</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2030 -->
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-indigo-50 rounded-2xl p-6">
+                                <h3 class="font-display text-2xl font-semibold text-gray-900 mb-2">2030</h3>
+                                <h4 class="font-semibold text-gray-900 mb-3">Expansion Afrique</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Déploiement dans 10 pays africains</li>
+                                    <li>• Hub technologique continental</li>
+                                    <li>• Partenariats régionaux</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center relative z-10">
+                            <i class="fas fa-globe-africa text-white text-sm"></i>
+                        </div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-br from-green-600 to-blue-600">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-display text-4xl font-bold text-white mb-6">
+                Construisons l'avenir blockchain vert ensemble
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Rejoignez la révolution technologique durable et participez à la construction d'un écosystème blockchain responsable.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="window.location.href='invest.html'" class="bg-white text-green-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
+                    Investir maintenant
+                </button>
+                <button onclick="window.location.href='pool.html'" class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-green-600 transition-all transform hover:scale-105">
+                    Rejoindre le Pool
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl">Green Hash Maroc</span>
+                </div>
+                
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Mining the Future. The Green Way. Premier pool minier marocain alimenté par énergie renouvelable.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Green Hash Maroc. Tous droits réservés. | Nador, Maroc
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            // AI Performance Chart
+            const aiCtx = document.getElementById('aiChart').getContext('2d');
+            new Chart(aiCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun'],
+                    datasets: [{
+                        label: 'Efficacité énergétique (%)',
+                        data: [78, 82, 85, 88, 91, 94],
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Réduction conso (%)',
+                        data: [5, 7, 9, 11, 13, 15],
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Carbon Footprint Chart
+            const carbonCtx = document.getElementById('carbonChart').getContext('2d');
+            new Chart(carbonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023', '2024', '2025', '2026', '2027'],
+                    datasets: [{
+                        label: 'kg CO₂/transaction',
+                        data: [0.45, 0.28, 0.15, 0.08, 0.00],
+                        backgroundColor: ['#EF4444', '#F97316', '#EAB308', '#22C55E', '#10B981'],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Real-time stats update simulation
+            setInterval(() => {
+                const elements = document.querySelectorAll('[data-live]');
+                elements.forEach(el => {
+                    const currentValue = parseFloat(el.textContent);
+                    const variation = (Math.random() - 0.5) * 0.02;
+                    const newValue = Math.max(0, currentValue + variation);
+                    el.textContent = newValue.toFixed(2);
+                });
+            }, 5000);
+        });
+
+        // Language selector
+        document.getElementById('language-select').addEventListener('change', function(e) {
+            const lang = e.target.value;
+            console.log('Language switched to:', lang);
+        });
+
+        // Smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

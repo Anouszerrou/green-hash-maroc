@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investir - Green Hash Maroc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sage: #87A96B;
+            --charcoal: #2D3436;
+            --mint: #00B894;
+            --cream: #F7F3E9;
+            --gold: #F39C12;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .investment-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .investment-card:hover {
+            border-color: var(--mint);
+            transform: translateY(-2px);
+        }
+        
+        .investment-card.selected {
+            border-color: var(--sage);
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl text-gray-900">Green Hash</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 transition-colors">Accueil</a>
+                    <a href="vision.html" class="text-gray-700 hover:text-green-600 transition-colors">Vision</a>
+                    <a href="pool.html" class="text-gray-700 hover:text-green-600 transition-colors">Mining Pool</a>
+                    <a href="exchange.html" class="text-gray-700 hover:text-green-600 transition-colors">Exchange</a>
+                    <a href="services.html" class="text-gray-700 hover:text-green-600 transition-colors">Services</a>
+                    <a href="#invest" class="text-green-600 font-semibold">Investir</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-600 transition-colors">Communauté</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <select id="language-select" class="bg-transparent border-0 text-sm">
+                        <option value="fr">FR</option>
+                        <option value="en">EN</option>
+                        <option value="ar">AR</option>
+                    </select>
+                    <button onclick="showInvestModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Devenir Investisseur
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Participez à la <span class="text-gradient">Révolution Blockchain</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                    Investissez dans le premier écosystème blockchain marocain alimenté par énergie verte
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-green-600">15-25%</div>
+                        <div class="text-sm text-gray-600">ROI estimé annuel</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-blue-600">100%</div>
+                        <div class="text-sm text-gray-600">Énergie renouvelable</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-purple-600">24/7</div>
+                        <div class="text-sm text-gray-600">Monitoring actif</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Invest -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Pourquoi investir dans Green Hash ?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Opportunité unique de participer à la transformation numérique du Maroc
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-leaf text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Énergie verte</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Premier projet blockchain marocain 100% alimenté par énergie renouvelable avec un impact environnemental minimal.
+                    </p>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-600">-78%</div>
+                        <div class="text-sm text-gray-600">Émissions CO₂</div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Rendement optimisé</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        ROI attractif grâce à l'optimisation énergétique et les coûts de fonctionnement réduits par rapport au minage traditionnel.
+                    </p>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-600">20%</div>
+                        <div class="text-sm text-gray-600">ROI moyen</div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Infrastructure sécurisée</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Infrastructure robuste avec monitoring 24/7, protection anti-DDoS et audits de sécurité réguliers.
+                    </p>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-purple-600">99.9%</div>
+                        <div class="text-sm text-gray-600">Disponibilité</div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-globe-africa text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Marché en croissance</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Position stratégique sur le marché africain en pleine expansion avec un fort potentiel de développement.
+                    </p>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-yellow-600">300%</div>
+                        <div class="text-sm text-gray-600">Croissance marché</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Options -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Options d'investissement</h2>
+                <p class="text-xl text-gray-600">Choisissez le modèle qui correspond à vos objectifs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Mining Pool Investment -->
+                <div class="investment-card rounded-2xl p-8 cursor-pointer" onclick="selectInvestment('mining')">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-pickaxe text-white text-3xl"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold text-gray-900 mb-2">Mining Pool</h3>
+                        <p class="text-gray-600">Partage des revenus du pool minier</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Investissement minimum</span>
+                            <span class="font-semibold text-gray-900">50,000 MAD</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">ROI estimé</span>
+                            <span class="font-semibold text-green-600">15-20% / an</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Période de lock</span>
+                            <span class="font-semibold text-gray-900">12 mois</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Paiements</span>
+                            <span class="font-semibold text-gray-900">Mensuels</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">Avantages</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Revenus passifs réguliers</li>
+                            <li>• Risque faible modéré</li>
+                            <li>• Sortie possible après 12 mois</li>
+                            <li>• Monitoring transparent</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Exchange Investment -->
+                <div class="investment-card rounded-2xl p-8 cursor-pointer" onclick="selectInvestment('exchange')">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-exchange-alt text-white text-3xl"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold text-gray-900 mb-2">Exchange</h3>
+                        <p class="text-gray-600">Participation aux revenus de la plateforme</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Investissement minimum</span>
+                            <span class="font-semibold text-gray-900">100,000 MAD</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">ROI estimé</span>
+                            <span class="font-semibold text-blue-600">20-25% / an</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Période de lock</span>
+                            <span class="font-semibold text-gray-900">24 mois</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Paiements</span>
+                            <span class="font-semibold text-gray-900">Trimestriels</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">Avantages</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Potentiel de croissance élevé</li>
+                            <li>• Part du marché marocain</li>
+                            <li>• Revenue sharing model</li>
+                            <li>• Token GHM inclus</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Technology Investment -->
+                <div class="investment-card rounded-2xl p-8 cursor-pointer" onclick="selectInvestment('technology')">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cogs text-white text-3xl"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold text-gray-900 mb-2">Technologie</h3>
+                        <p class="text-gray-600">Investissement dans le développement tech</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Investissement minimum</span>
+                            <span class="font-semibold text-gray-900">500,000 MAD</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">ROI estimé</span>
+                            <span class="font-semibold text-purple-600">25-35% / an</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Période de lock</span>
+                            <span class="font-semibold text-gray-900">36 mois</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Paiements</span>
+                            <span class="font-semibold text-gray-900">Semestriels</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">Avantages</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Accès aux technologies exclusives</li>
+                            <li>• Potentiel ROI maximal</li>
+                            <li>• Partenariat stratégique</li>
+                            <li>• Influence sur la roadmap</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Process -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Processus d'investissement</h2>
+                <p class="text-xl text-gray-600">Simple, transparent et sécurisé</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-xl">1</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Évaluation</h3>
+                    <p class="text-sm text-gray-600">Analyse de votre profil et définition de la stratégie d'investissement adaptée</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-xl">2</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Documentation</h3>
+                    <p class="text-sm text-gray-600">Présentation du pitch deck et des documents légaux pour une transparence totale</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-xl">3</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Investissement</h3>
+                    <p class="text-sm text-gray-600">Signature des accords et transfert sécurisé des fonds via virement bancaire</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-xl">4</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Suivi</h3>
+                    <p class="text-sm text-gray-600">Accès à votre dashboard personnel et rapports réguliers sur vos investissements</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Analysis -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Analyse du marché</h2>
+                <p class="text-xl text-gray-600">Potentiel de croissance du marché blockchain africain</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-6 text-center">Croissance du marché</h3>
+                    <div class="h-64 mb-6">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-600">+300%</div>
+                            <div class="text-sm text-gray-600">Croissance 2025-2030</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-600">$2.4B</div>
+                            <div class="text-sm text-gray-600">Marché africain 2030</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <h4 class="font-semibold text-gray-900 mb-3">Opportunités uniques</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span>Premier mover sur le marché marocain</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span>Adoption croissante des cryptomonnaies</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span>Politiques gouvernementales favorables</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                <span>Demandes d'inclusion financière</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <h4 class="font-semibold text-gray-900 mb-3">Avantages compétitifs</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                <span>Technologie exclusive et brevetée</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                <span>Équipe d'experts locaux et internationaux</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                <span>Partenariats stratégiques établis</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                <span>Conformité réglementaire complète</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Modal -->
+    <div id="investModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-lg w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Devenir Investisseur</h3>
+                <p class="text-gray-600">Rejoignez la révolution blockchain marocaine</p>
+            </div>
+            
+            <form id="investForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Votre nom">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="votre@email.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Type d'investissement</label>
+                    <select id="investmentType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">Sélectionnez une option</option>
+                        <option value="mining">Mining Pool (50k+ MAD)</option>
+                        <option value="exchange">Exchange (100k+ MAD)</option>
+                        <option value="technology">Technologie (500k+ MAD)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Montant d'investissement</label>
+                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">Sélectionnez un montant</option>
+                        <option value="50-100k">50,000 - 100,000 MAD</option>
+                        <option value="100-500k">100,000 - 500,000 MAD</option>
+                        <option value="500k-1m">500,000 - 1,000,000 MAD</option>
+                        <option value="1m+">> 1,000,000 MAD</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Expérience en crypto</label>
+                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">Sélectionnez votre niveau</option>
+                        <option value="debutant">Débutant</option>
+                        <option value="intermediaire">Intermédiaire</option>
+                        <option value="avance">Avancé</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
+                
+                <div class="flex space-x-4 pt-4">
+                    <button type="button" onclick="hideInvestModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        Annuler
+                    </button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                        Envoyer Demande
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl">Green Hash Maroc</span>
+                </div>
+                
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Mining the Future. The Green Way. Premier pool minier marocain alimenté par énergie renouvelable.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Green Hash Maroc. Tous droits réservés. | Nador, Maroc
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selectedInvestment = null;
+
+        function selectInvestment(type) {
+            selectedInvestment = type;
+            
+            // Remove selected class from all cards
+            document.querySelectorAll('.investment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Update modal select
+            document.getElementById('investmentType').value = type;
+        }
+
+        // Modal functions
+        function showInvestModal() {
+            document.getElementById('investModal').classList.remove('hidden');
+        }
+
+        function hideInvestModal() {
+            document.getElementById('investModal').classList.add('hidden');
+        }
+
+        // Form submission
+        document.getElementById('investForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Demande d\'investissement envoyée avec succès ! Nous vous contacterons dans les 48h avec le pitch deck complet.');
+            hideInvestModal();
+        });
+
+        // Chart.js configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                    datasets: [{
+                        label: 'Marché blockchain Afrique (Milliards $)',
+                        data: [0.8, 1.2, 1.8, 2.4, 3.2, 4.1, 5.0],
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Language selector
+        document.getElementById('language-select').addEventListener('change', function(e) {
+            const lang = e.target.value;
+            console.log('Language switched to:', lang);
+        });
+
+        // Smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

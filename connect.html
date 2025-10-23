@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Wallet - Green Hash Maroc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.9.0/web3.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sage: #87A96B;
+            --charcoal: #2D3436;
+            --mint: #00B894;
+            --cream: #F7F3E9;
+            --gold: #F39C12;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .wallet-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .wallet-card:hover {
+            border-color: var(--mint);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wallet-card.connected {
+            border-color: var(--sage);
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        }
+        
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--mint);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl text-gray-900">Green Hash</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 transition-colors">Accueil</a>
+                    <a href="vision.html" class="text-gray-700 hover:text-green-600 transition-colors">Vision</a>
+                    <a href="pool.html" class="text-gray-700 hover:text-green-600 transition-colors">Mining Pool</a>
+                    <a href="exchange.html" class="text-gray-700 hover:text-green-600 transition-colors">Exchange</a>
+                    <a href="services.html" class="text-gray-700 hover:text-green-600 transition-colors">Services</a>
+                    <a href="invest.html" class="text-gray-700 hover:text-green-600 transition-colors">Investir</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-600 transition-colors">Communauté</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <select id="language-select" class="bg-transparent border-0 text-sm">
+                        <option value="fr">FR</option>
+                        <option value="en">EN</option>
+                        <option value="ar">AR</option>
+                    </select>
+                    <div id="wallet-status" class="text-sm text-gray-600">
+                        <i class="fas fa-circle text-red-500 mr-1"></i>
+                        Non connecté
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Connectez votre <span class="text-gradient">Wallet</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                    Accédez à l'écosystème complet Green Hash via votre wallet Web3
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-green-600">4</div>
+                        <div class="text-sm text-gray-600">Wallets supportés</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-blue-600">100%</div>
+                        <div class="text-sm text-gray-600">Sécurisé</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-purple-600">Instantané</div>
+                        <div class="text-sm text-gray-600">Connexion</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wallet Selection -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Choisissez votre Wallet</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Support des principaux wallets Web3 pour une connexion sécurisée
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- MetaMask -->
+                <div class="wallet-card rounded-2xl p-8 text-center" onclick="connectWallet('metamask')">
+                    <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fab fa-ethereum text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">MetaMask</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Le wallet le plus populaire pour Ethereum et les réseaux EVM.
+                    </p>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Navigateur & Mobile</span>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Décentralisé</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Trust Wallet -->
+                <div class="wallet-card rounded-2xl p-8 text-center" onclick="connectWallet('trustwallet')">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Trust Wallet</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Wallet mobile sécurisé avec support multi-chaînes.
+                    </p>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Mobile Only</span>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Multi-chaînes</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- WalletConnect -->
+                <div class="wallet-card rounded-2xl p-8 text-center" onclick="connectWallet('walletconnect')">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-link text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">WalletConnect</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Protocole ouvert pour connecter tous les wallets.
+                    </p>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Universal</span>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>QR Code</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ledger -->
+                <div class="wallet-card rounded-2xl p-8 text-center" onclick="connectWallet('ledger')">
+                    <div class="w-20 h-20 bg-gradient-to-br from-gray-400 to-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-microchip text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Ledger</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Hardware wallet pour une sécurité maximale.
+                    </p>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Hardware</span>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Certifié</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section (Hidden by default) -->
+    <section id="dashboard-section" class="py-20 bg-gray-50 hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Votre Dashboard</h2>
+                <p class="text-xl text-gray-600">Bienvenue dans l'écosystème Green Hash</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Wallet Info -->
+                <div class="lg:col-span-1">
+                    <div class="dashboard-card rounded-2xl p-6 mb-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Wallet Connecté</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900" id="connected-wallet">MetaMask</div>
+                                    <div class="text-xs text-gray-600" id="wallet-address">0x1234...5678</div>
+                                </div>
+                            </div>
+                            <button onclick="disconnectWallet()" class="w-full text-red-600 hover:text-red-700 text-sm">
+                                <i class="fas fa-sign-out-alt mr-1"></i>
+                                Déconnecter
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="dashboard-card rounded-2xl p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Actions Rapides</h3>
+                        <div class="space-y-3">
+                            <button onclick="window.location.href='pool.html'" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors text-sm">
+                                <i class="fas fa-pickaxe mr-2"></i>
+                                Rejoindre le Pool
+                            </button>
+                            <button onclick="window.location.href='exchange.html'" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                <i class="fas fa-exchange-alt mr-2"></i>
+                                Échanger
+                            </button>
+                            <button onclick="window.location.href='invest.html'" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+                                <i class="fas fa-chart-line mr-2"></i>
+                                Investir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio -->
+                <div class="lg:col-span-2">
+                    <div class="dashboard-card rounded-2xl p-6 mb-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Votre Portfolio</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600" id="balance-btc">0.0234</div>
+                                <div class="text-sm text-gray-600">BTC</div>
+                                <div class="text-xs text-green-500">+2.34%</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-600" id="balance-eth">1.2456</div>
+                                <div class="text-sm text-gray-600">ETH</div>
+                                <div class="text-xs text-red-500">-1.23%</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-purple-600" id="balance-ghm">1,247</div>
+                                <div class="text-sm text-gray-600">GHM</div>
+                                <div class="text-xs text-green-500">+5.67%</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-yellow-600" id="balance-usdt">234.56</div>
+                                <div class="text-sm text-gray-600">USDT</div>
+                                <div class="text-xs text-gray-500">0.00%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mining Stats -->
+                    <div class="dashboard-card rounded-2xl p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Performance Mining</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600" id="mining-hashrate">2.5</div>
+                                <div class="text-sm text-gray-600">TH/s</div>
+                                <div class="text-xs text-gray-500">Hashrate</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-600" id="mining-earnings">0.0012</div>
+                                <div class="text-sm text-gray-600">BTC/jour</div>
+                                <div class="text-xs text-gray-500">Revenus</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-purple-600" id="mining-blocks">3</div>
+                                <div class="text-sm text-gray-600">Blocs</div>
+                                <div class="text-xs text-gray-500">Cette semaine</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-yellow-600" id="mining-efficiency">94.2</div>
+                                <div class="text-sm text-gray-600">%</div>
+                                <div class="text-xs text-gray-500">Efficacité</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center">
+            <div class="loading-spinner mx-auto mb-6"></div>
+            <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">Connexion en cours</h3>
+            <p class="text-gray-600">Veuillez confirmer la connexion dans votre wallet...</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-check text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">Connexion réussie !</h3>
+            <p class="text-gray-600 mb-6">Bienvenue dans l'écosystème Green Hash</p>
+            <button onclick="hideSuccessModal()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                Continuer
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl">Green Hash Maroc</span>
+                </div>
+                
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Mining the Future. The Green Way. Premier pool minier marocain alimenté par énergie renouvelable.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Green Hash Maroc. Tous droits réservés. | Nador, Maroc
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="connect.js"></script>
+</body>
+</html>

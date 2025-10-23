@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communauté & Éducation - Green Hash Maroc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sage: #87A96B;
+            --charcoal: #2D3436;
+            --mint: #00B894;
+            --cream: #F7F3E9;
+            --gold: #F39C12;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .course-card:hover {
+            border-color: var(--mint);
+            transform: translateY(-2px);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--sage) 0%, var(--mint) 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl text-gray-900">Green Hash</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 transition-colors">Accueil</a>
+                    <a href="vision.html" class="text-gray-700 hover:text-green-600 transition-colors">Vision</a>
+                    <a href="pool.html" class="text-gray-700 hover:text-green-600 transition-colors">Mining Pool</a>
+                    <a href="exchange.html" class="text-gray-700 hover:text-green-600 transition-colors">Exchange</a>
+                    <a href="services.html" class="text-gray-700 hover:text-green-600 transition-colors">Services</a>
+                    <a href="invest.html" class="text-gray-700 hover:text-green-600 transition-colors">Investir</a>
+                    <a href="#community" class="text-green-600 font-semibold">Communauté</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <select id="language-select" class="bg-transparent border-0 text-sm">
+                        <option value="fr">FR</option>
+                        <option value="en">EN</option>
+                        <option value="ar">AR</option>
+                    </select>
+                    <button onclick="showRegisterModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        S'inscrire
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Communauté & <span class="text-gradient">Éducation</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                    Parce que la blockchain est d'abord une connaissance
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-green-600">10,000+</div>
+                        <div class="text-sm text-gray-600">Membres actifs</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-blue-600">50+</div>
+                        <div class="text-sm text-gray-600">Cours disponibles</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-6 py-3 shadow-lg">
+                        <div class="text-2xl font-bold text-purple-600">24/7</div>
+                        <div class="text-sm text-gray-600">Support communautaire</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- École Green Hash -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">École Green Hash</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Formez-vous aux technologies blockchain avec nos programmes éducatifs complets
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+                <div>
+                    <h3 class="font-display text-3xl font-semibold text-gray-900 mb-8">Apprentissage progressif</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">1</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2">Fondamentaux</h4>
+                                <p class="text-gray-600">Introduction à la blockchain, cryptomonnaies et principes de base du Web3.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">2</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2">Minage et validation</h4>
+                                <p class="text-gray-600">Comprendre le minage, les consensus mechanisms et la validation des transactions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">3</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2">Applications pratiques</h4>
+                                <p class="text-gray-600">Smart contracts, DeFi, NFT et cas d'usage professionnels de la blockchain.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">4</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2">Expertise avancée</h4>
+                                <p class="text-gray-600">Développement blockchain, sécurité et stratégies d'investissement avancées.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-100 to-blue-100 rounded-3xl p-8">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <i class="fas fa-graduation-cap text-green-600 text-3xl"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold text-gray-900">Certification Green Hash</h3>
+                        <p class="text-gray-600 mt-2">Diplôme reconnu par l'industrie blockchain</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                            <div class="text-3xl font-bold text-green-600 mb-2">40h</div>
+                            <div class="text-sm text-gray-600">Formation totale</div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">12</div>
+                            <div class="text-sm text-gray-600">Modules</div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                            <div class="text-3xl font-bold text-purple-600 mb-2">100%</div>
+                            <div class="text-sm text-gray-600">En ligne</div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                            <div class="text-3xl font-bold text-yellow-600 mb-2">Fr/Ar</div>
+                            <div class="text-sm text-gray-600">Langues</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cours Populaires -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Cours Populaires</h2>
+                <p class="text-xl text-gray-600">Les formations les plus suivies par notre communauté</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="course-card rounded-2xl p-6">
+                    <div class="w-full h-48 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl mb-6 flex items-center justify-center">
+                        <i class="fab fa-bitcoin text-white text-6xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">Bitcoin et cryptomonnaies</h3>
+                    <p class="text-gray-600 mb-4">Comprendre le fonctionnement de Bitcoin et l'écosystème des cryptomonnaies.</p>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm text-gray-500">Durée: 6h</span>
+                        <span class="text-sm text-gray-500">Niveau: Débutant</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between text-sm mb-2">
+                            <span class="text-gray-600">Progression</span>
+                            <span class="text-gray-600">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="progress-bar h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="enrollCourse('bitcoin')" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                        S'inscrire
+                    </button>
+                </div>
+                
+                <div class="course-card rounded-2xl p-6">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl mb-6 flex items-center justify-center">
+                        <i class="fas fa-cube text-white text-6xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">Smart Contracts</h3>
+                    <p class="text-gray-600 mb-4">Apprenez à créer et déployer vos propres smart contracts sur Ethereum.</p>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm text-gray-500">Durée: 12h</span>
+                        <span class="text-sm text-gray-500">Niveau: Intermédiaire</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between text-sm mb-2">
+                            <span class="text-gray-600">Progression</span>
+                            <span class="text-gray-600">62%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="progress-bar h-2 rounded-full" style="width: 62%"></div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="enrollCourse('smart-contracts')" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                        S'inscrire
+                    </button>
+                </div>
+                
+                <div class="course-card rounded-2xl p-6">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-400 to-teal-500 rounded-xl mb-6 flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-6xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">Blockchain verte</h3>
+                    <p class="text-gray-600 mb-4">Explorez les solutions blockchain durables et l'impact environnemental.</p>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm text-gray-500">Durée: 8h</span>
+                        <span class="text-sm text-gray-500">Niveau: Avancé</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between text-sm mb-2">
+                            <span class="text-gray-600">Progression</span>
+                            <span class="text-gray-600">34%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="progress-bar h-2 rounded-full" style="width: 34%"></div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="enrollCourse('green-blockchain')" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                        S'inscrire
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communauté -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Rejoignez la communauté</h2>
+                <p class="text-xl text-gray-600">Connectez-vous avec d'autres passionnés de blockchain</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fab fa-telegram text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Telegram</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Rejoignez notre groupe officiel pour des discussions en direct et des annonces exclusives.
+                    </p>
+                    <button onclick="joinCommunity('telegram')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Rejoindre
+                    </button>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fab fa-discord text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Discord</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Serveur communautaire avec salons thématiques et événements réguliers.
+                    </p>
+                    <button onclick="joinCommunity('discord')" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        Rejoindre
+                    </button>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fab fa-twitter text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Twitter</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Suivez nos actualités, articles éducatifs et interactions avec la communauté.
+                    </p>
+                    <button onclick="joinCommunity('twitter')" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        Suivre
+                    </button>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fab fa-linkedin text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">LinkedIn</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Réseau professionnel pour les opportunités de carrière et partenariats.
+                    </p>
+                    <button onclick="joinCommunity('linkedin')" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors">
+                        Suivre
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Forum Communautaire -->
+            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8">
+                <div class="text-center mb-8">
+                    <h3 class="font-display text-3xl font-semibold text-gray-900 mb-4">Forum Communautaire</h3>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        Posez vos questions, partagez vos connaissances et apprenez des autres membres
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-semibold text-gray-900">Questions techniques</h4>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">1,247 posts</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">Discussions sur le minage, les wallets et la sécurité.</p>
+                        <button onclick="openForum('technical')" class="text-blue-600 hover:text-blue-700 text-sm font-semibold">
+                            Voir le forum →
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-semibold text-gray-900">Stratégies d'investissement</h4>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">892 posts</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">Partage d'expériences et analyses de marché.</p>
+                        <button onclick="openForum('investment')" class="text-green-600 hover:text-green-700 text-sm font-semibold">
+                            Voir le forum →
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-semibold text-gray-900">Projets communautaires</h4>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">634 posts</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">Collaborations et initiatives de la communauté.</p>
+                        <button onclick="openForum('projects')" class="text-purple-600 hover:text-purple-700 text-sm font-semibold">
+                            Voir le forum →
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button onclick="showRegisterModal()" class="bg-green-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-green-700 transition-colors">
+                        Rejoindre le forum
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Événements & Webinaires -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Événements & Webinaires</h2>
+                <p class="text-xl text-gray-600">Participez à nos événements éducatifs et networking</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-calendar text-green-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">25 Octobre 2025</div>
+                            <div class="font-semibold text-gray-900">Webinaire: Introduction à Bitcoin</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Webinaire gratuit pour débutants sur les bases de Bitcoin et des cryptomonnaies.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Durée: 2h</span>
+                        <button onclick="registerEvent('bitcoin-webinar')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
+                            S'inscrire
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-users text-blue-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">15 Novembre 2025</div>
+                            <div class="font-semibold text-gray-900">Meetup: Blockchain & Énergie</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Rencontrez d'autres passionnés et discutez des solutions blockchain vertes.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Lieu: Casablanca</span>
+                        <button onclick="registerEvent('blockchain-energy-meetup')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                            S'inscrire
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-code text-purple-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">5 Décembre 2025</div>
+                            <div class="font-semibold text-gray-900">Hackathon: Green Solutions</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">48h pour développer des solutions blockchain durables avec des prix attractifs.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Durée: 48h</span>
+                        <button onclick="registerEvent('green-hackathon')" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+                            S'inscrire
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partenariats Universitaires -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Partenariats universitaires</h2>
+                <p class="text-xl text-gray-600">Collaborations avec les principales universités marocaines</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+                <div class="bg-gray-50 rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-sm">UM5</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-900">Université Mohammed V</h4>
+                    <p class="text-sm text-gray-600">Rabat</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-sm">UCA</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-900">Université Cadi Ayyad</h4>
+                    <p class="text-sm text-gray-600">Marrakech</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-sm">UAE</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-900">Université Al Akhawayn</h4>
+                    <p class="text-sm text-gray-600">Ifrane</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-sm">UMI</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-900">Université Mohammed Ier</h4>
+                    <p class="text-sm text-gray-600">Oujda</p>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-8 text-center">
+                <h3 class="font-display text-2xl font-semibold text-gray-900 mb-4">Programmes étudiants</h3>
+                <p class="text-gray-600 mb-6 max-w-3xl mx-auto">
+                    Des programmes spéciaux pour les étudiants avec des réductions sur les formations, 
+                    des stages et des opportunités de carrière dans l'écosystème Green Hash.
+                </p>
+                <button onclick="showStudentModal()" class="bg-green-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-green-700 transition-colors">
+                    Programme étudiant
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Modal -->
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Rejoindre la communauté</h3>
+                <p class="text-gray-600">Accédez aux cours et au forum communautaire</p>
+            </div>
+            
+            <form id="registerForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Votre nom">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="votre@email.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Niveau d'expérience</label>
+                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">Sélectionnez votre niveau</option>
+                        <option value="debutant">Débutant</option>
+                        <option value="intermediaire">Intermédiaire</option>
+                        <option value="avance">Avancé</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Centres d'intérêt</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-600">Minage</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-600">Trading</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-600">Développement blockchain</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-600">Énergie verte</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-4 pt-4">
+                    <button type="button" onclick="hideRegisterModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        Annuler
+                    </button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                        S'inscrire
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Modal -->
+    <div id="studentModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-lg w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Programme Étudiant</h3>
+                <p class="text-gray-600">Avantages exclusifs pour les étudiants marocains</p>
+            </div>
+            
+            <div class="space-y-4 mb-6">
+                <div class="bg-green-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 mb-2">🎓 Réductions étudiantes</h4>
+                    <p class="text-sm text-green-700">-50% sur toutes les formations et cours certifiants</p>
+                </div>
+                
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">💼 Stages et emplois</h4>
+                    <p class="text-sm text-blue-700">Opportunités de stage et d'emploi dans l'écosystème Green Hash</p>
+                </div>
+                
+                <div class="bg-purple-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-purple-800 mb-2">🚀 Projets étudiants</h4>
+                    <p class="text-sm text-purple-700">Support pour les projets blockchain des étudiants</p>
+                </div>
+                
+                <div class="bg-yellow-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-yellow-800 mb-2">🤝 Mentorat</h4>
+                    <p class="text-sm text-yellow-700">Programme de mentorat avec des experts de l'industrie</p>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4">
+                <button type="button" onclick="hideStudentModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    Fermer
+                </button>
+                <button onclick="showRegisterModal()" class="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                    Postuler
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl">Green Hash Maroc</span>
+                </div>
+                
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Mining the Future. The Green Way. Premier pool minier marocain alimenté par énergie renouvelable.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Green Hash Maroc. Tous droits réservés. | Nador, Maroc
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Modal functions
+        function showRegisterModal() {
+            document.getElementById('registerModal').classList.remove('hidden');
+        }
+
+        function hideRegisterModal() {
+            document.getElementById('registerModal').classList.add('hidden');
+        }
+
+        function showStudentModal() {
+            document.getElementById('studentModal').classList.remove('hidden');
+        }
+
+        function hideStudentModal() {
+            document.getElementById('studentModal').classList.add('hidden');
+        }
+
+        // Form submissions
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Inscription réussie ! Bienvenue dans la communauté Green Hash.');
+            hideRegisterModal();
+        });
+
+        // Course enrollment
+        function enrollCourse(courseId) {
+            alert(`Inscription au cours ${courseId} réussie ! Vous recevrez les accès par email.`);
+        }
+
+        // Community joining
+        function joinCommunity(platform) {
+            const links = {
+                'telegram': 'https://t.me/greenhashmaroc',
+                'discord': 'https://discord.gg/greenhash',
+                'twitter': 'https://twitter.com/greenhashma',
+                'linkedin': 'https://linkedin.com/company/greenhash'
+            };
+            
+            if (links[platform]) {
+                window.open(links[platform], '_blank');
+            }
+        }
+
+        // Forum access
+        function openForum(category) {
+            alert(`Accès au forum ${category} - Connectez-vous pour participer aux discussions.`);
+        }
+
+        // Event registration
+        function registerEvent(eventId) {
+            alert(`Inscription à l'événement ${eventId} confirmée ! Vous recevrez les détails par email.`);
+        }
+
+        // Language selector
+        document.getElementById('language-select').addEventListener('change', function(e) {
+            const lang = e.target.value;
+            console.log('Language switched to:', lang);
+        });
+
+        // Smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
