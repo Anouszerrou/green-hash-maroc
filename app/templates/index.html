@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Hash Maroc - Mining the Future. The Green Way.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sage: #87A96B;
+            --charcoal: #2D3436;
+            --mint: #00B894;
+            --cream: #F7F3E9;
+            --gold: #F39C12;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        #vanta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl text-gray-900">Green Hash</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-green-600 transition-colors">Accueil</a>
+                    <a href="vision.html" class="text-gray-700 hover:text-green-600 transition-colors">Vision</a>
+                    <a href="pool.html" class="text-gray-700 hover:text-green-600 transition-colors">Mining Pool</a>
+                    <a href="exchange.html" class="text-gray-700 hover:text-green-600 transition-colors">Exchange</a>
+                    <a href="services.html" class="text-gray-700 hover:text-green-600 transition-colors">Services</a>
+                    <a href="invest.html" class="text-gray-700 hover:text-green-600 transition-colors">Investir</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-600 transition-colors">Communauté</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <select id="language-select" class="bg-transparent border-0 text-sm">
+                        <option value="fr">FR</option>
+                        <option value="en">EN</option>
+                        <option value="ar">AR</option>
+                    </select>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Rejoindre le Pool
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div id="vanta-bg"></div>
+        <div class="content-overlay text-center text-white px-4 max-w-6xl mx-auto">
+            <div class="animate-float mb-8">
+                <div class="w-32 h-32 mx-auto mb-6 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i class="fas fa-coins text-6xl text-yellow-300"></i>
+                </div>
+            </div>
+            
+            <h1 class="font-display font-bold text-5xl md:text-7xl mb-6 leading-tight">
+                Mining the Future.
+                <span class="block text-gradient">The Green Way.</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+                Green Hash Maroc — Blockchain & Énergie Verte Unies
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <button onclick="window.location.href='vision.html'" class="bg-white text-green-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
+                    Découvrir le projet
+                </button>
+                <button onclick="window.location.href='pool.html'" class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-green-600 transition-all transform hover:scale-105">
+                    Rejoindre le Pool
+                </button>
+            </div>
+            
+            <!-- Key Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold mb-2">1er</div>
+                    <div class="text-sm opacity-80">Pool Marocain 🇲🇦</div>
+                </div>
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold mb-2">100%</div>
+                    <div class="text-sm opacity-80">Énergie Verte 🌞</div>
+                </div>
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold mb-2">Web3</div>
+                    <div class="text-sm opacity-80">Blockchain Solutions 🌐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Accès rapides</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Découvrez nos services blockchain et rejoignez la révolution verte
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Investir</h3>
+                    <p class="text-gray-600 mb-6">Participez à la révolution blockchain marocaine et profitez de rendements énergétiques optimisés.</p>
+                    <button onclick="window.location.href='invest.html'" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        Devenir investisseur
+                    </button>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Rejoindre le Pool</h3>
+                    <p class="text-gray-600 mb-6">Le premier pool marocain alimenté par énergie verte, accessible aux mineurs locaux et internationaux.</p>
+                    <button onclick="window.location.href='pool.html'" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Rejoindre maintenant
+                    </button>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-cogs text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Nos Services</h3>
+                    <p class="text-gray-600 mb-6">Solutions blockchain professionnelles pour entreprises marocaines et accompagnement Web3.</p>
+                    <button onclick="window.location.href='services.html'" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        Voir les services
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-time Stats -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Statuts en temps réel</h2>
+                <p class="text-xl text-gray-600">Suivez l'activité de notre pool et notre production énergétique</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <div class="text-3xl font-bold text-green-600 mb-2" id="hashrate">12.5 TH/s</div>
+                    <div class="text-gray-600">Hashrate du Pool</div>
+                    <div class="text-sm text-green-500 mt-2">
+                        <i class="fas fa-arrow-up"></i> +2.3% aujourd'hui
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <div class="text-3xl font-bold text-blue-600 mb-2" id="blocks">127</div>
+                    <div class="text-gray-600">Blocs trouvés</div>
+                    <div class="text-sm text-blue-500 mt-2">
+                        <i class="fas fa-calendar"></i> Ce mois-ci
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <div class="text-3xl font-bold text-yellow-600 mb-2" id="energy">2.4 MWh</div>
+                    <div class="text-gray-600">Énergie produite</div>
+                    <div class="text-sm text-yellow-500 mt-2">
+                        <i class="fas fa-solar-panel"></i> Solaire
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <div class="text-3xl font-bold text-purple-600 mb-2" id="miners">1,247</div>
+                    <div class="text-gray-600">Mineurs actifs</div>
+                    <div class="text-sm text-purple-500 mt-2">
+                        <i class="fas fa-users"></i> +89 aujourd'hui
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-600 to-green-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl">Green Hash Maroc</span>
+                </div>
+                
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Mining the Future. The Green Way. Premier pool minier marocain alimenté par énergie renouvelable.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Green Hash Maroc. Tous droits réservés. | Nador, Maroc
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Vanta.js background
+        VANTA.BIRDS({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            backgroundColor: 0x87a96b,
+            color1: 0x00b894,
+            color2: 0x2d3436,
+            birdSize: 1.20,
+            wingSpan: 25.00,
+            speedLimit: 3.00,
+            separation: 20.00,
+            alignment: 20.00,
+            cohesion: 20.00,
+            quantity: 3.00
+        });
+
+        // Real-time stats animation
+        function animateStats() {
+            const hashrate = document.getElementById('hashrate');
+            const blocks = document.getElementById('blocks');
+            const energy = document.getElementById('energy');
+            const miners = document.getElementById('miners');
+            
+            setInterval(() => {
+                // Simulate real-time updates
+                const currentHashrate = parseFloat(hashrate.textContent);
+                const newHashrate = currentHashrate + (Math.random() - 0.5) * 0.1;
+                hashrate.textContent = newHashrate.toFixed(1) + ' TH/s';
+                
+                const currentEnergy = parseFloat(energy.textContent);
+                const newEnergy = currentEnergy + Math.random() * 0.01;
+                energy.textContent = newEnergy.toFixed(2) + ' MWh';
+            }, 3000);
+        }
+
+        // Language selector
+        document.getElementById('language-select').addEventListener('change', function(e) {
+            const lang = e.target.value;
+            // Here you would implement language switching logic
+            console.log('Language switched to:', lang);
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            animateStats();
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
