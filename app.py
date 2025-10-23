@@ -14,7 +14,7 @@ import random
 import time
 from decimal import Decimal
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='app/templates', static_folder='static')
 app.config['SECRET_KEY'] = 'green-hash-maroc-secret-key-2025'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///greenhash.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
