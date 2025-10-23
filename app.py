@@ -82,6 +82,46 @@ with app.app_context():
 @app.route('/')
 def index():
     return render_template('index.html')
+    
+@app.route('/community')
+def community():
+    return render_template('community.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/invest')
+def invest():
+    return render_template('invest.html')
+
+@app.route('/innovation')
+def innovation():
+    return render_template('innovation.html')
+
+@app.route('/exchange')
+def exchange():
+    return render_template('exchange.html')
+
+@app.route('/pool')
+def pool():
+    return render_template('pool.html')
+
+@app.route('/services')
+def services():
+    return render_template('services.html')
+
+@app.route('/simulators')
+def simulators():
+    return render_template('simulators.html')
+
+@app.route('/vision')
+def vision():
+    return render_template('vision.html')
+
+@app.route('/connect')
+def connect():
+    return render_template('connect.html')
 
 @app.route('/api/stats/realtime')
 def get_realtime_stats():
